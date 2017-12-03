@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <!-- Biz 日志文件 -->
+    <appender name="biz_appender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${webapp.root}/logs/all/all.log"/>
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd-HH'.log'"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <param name="MaxFileSize" value="4MB"/>
+        <param name="encoding" value="utf-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[date:%d{yyyy-MM-dd HH:mm:ss}] %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- 将日志信息输出到文件，但是当文件的大小达到某个阈值的时候，日志文件会自动回滚 -->
+    <appender name="RollingFileAppender" class="org.apache.log4j.RollingFileAppender">
+        <!-- 设置日志信息输出文件全路径名 -->
+        <param name="File" value="${webapp.root}/logs/rolling/RollingFileAppender.log" />
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+        <param name="Append" value="true" />
+        <!-- 设置保存备份回滚日志的最大个数 -->
+        <param name="MaxBackupIndex" value="10" />
+        <!-- 设置当日志文件达到此阈值的时候自动回滚，单位可以是KB，MB，GB，默认单位是KB -->
+        <param name="MaxFileSize" value="10MB" />
+
+        <param name="encoding" value="utf-8"/>
+        <!-- 设置日志输出的样式 -->
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- 设置日志输出的格式 -->
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n" />
+        </layout>
+    </appender>
+
+    <!-- Error 日志文件 -->
+    <appender name="error_appender" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${webapp.root}/logs/error/error.log"/>
+        <!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+        <param name="Append" value="true"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd.HH'.log'"/>
+        <param name="MaxBackupIndex" value="20"/>
+        <param name="MaxFileSize" value="4MB"/>
+        <param name="encoding" value="utf-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <!-- 设置日志输出的格式 -->
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss:SSS}] [%-5p] [method:%l]%n%m%n%n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="ERROR"/>
+            <param name="LevelMax" value="ERROR"/>
+        </filter>
+    </appender>
+
+    <!-- Console 日志 -->
+    <appender name="console_appender" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-d{yyyy-MM-dd HH:mm:ss} [%5p][%t][%c{1}]-[%M] %m%n"/>
+        </layout>
+        <!--过滤器设置输出的级别-->
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <!-- 设置日志输出的最小级别 -->
+            <param name="levelMin" value="ERROR" />
+            <!-- 设置日志输出的最大级别 -->
+            <param name="levelMax" value="ERROR" />
+            <!-- 设置日志输出的xxx，默认是false -->
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+    </appender>
+
+    <root>
+        <priority value="INFO"/>
+        <appender-ref ref="console_appender"/>
+        <appender-ref ref="biz_appender"/>
+        <appender-ref ref="error_appender"/>
+        <appender-ref ref="RollingFileAppender"/>
+    </root>
+
+
+</log4j:configuration>

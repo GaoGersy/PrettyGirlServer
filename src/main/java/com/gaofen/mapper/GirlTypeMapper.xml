@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gaofen.mapper.GirlTypeMapper">
+  <resultMap id="BaseResultMap" type="com.gaofen.model.GirlType">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="girlType" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="categoryName" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, girlType, categoryName
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from girl_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from girl_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.gaofen.model.GirlType">
+    insert into girl_type (id, girlType, categoryName
+      )
+    values (#{id,jdbcType=INTEGER}, #{girlType,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.gaofen.model.GirlType">
+    insert into girl_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="girlType != null">
+        girlType,
+      </if>
+      <if test="categoryName != null">
+        categoryName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="girlType != null">
+        #{girlType,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gaofen.model.GirlType">
+    update girl_type
+    <set>
+      <if test="girlType != null">
+        girlType = #{girlType,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null">
+        categoryName = #{categoryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gaofen.model.GirlType">
+    update girl_type
+    set girlType = #{girlType,jdbcType=INTEGER},
+      categoryName = #{categoryName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getCategoryByName" resultType="com.gaofen.model.GirlType">
+    SELECT *
+    FROM girl_type
+    WHERE categoryName = #{categoryName}
+  </select>
+
+  <select id="getAllImageCategory" resultType="com.gaofen.model.GirlType">
+    SELECT * FROM girl_type
+  </select>
+</mapper>

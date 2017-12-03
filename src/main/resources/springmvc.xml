@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 启动注解驱动的Spring MVC功能，注册请求url和注解POJO类方法的映射-->
+    <!--<mvc:annotation-driven/>-->
+
+    <context:component-scan base-package="com.gaofen">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+    </context:component-scan>
+
+    <!-- 对模型视图名称的解析，在请求时模型视图名称添加前后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/"/>    <!-- 前缀 -->
+        <property name="suffix" value=".jsp"/>    <!-- 后缀 -->
+    </bean>
+
+    <!--<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--&lt;!&ndash; 标准配置 &ndash;&gt;-->
+                <!--<value>classpath*:application.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <mvc:annotation-driven>
+        <!--<mvc:message-converters>-->
+            <!--<bean/>-->
+            <!--<ref bean="jsonConverter"/>-->
+            <!--<ref bean="stringHttpMessageConverter"/>-->
+        <!--</mvc:message-converters>-->
+    </mvc:annotation-driven>
+
+    <mvc:default-servlet-handler/>
+
+    <bean id="stringHttpMessageConverter"
+            class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonConverter"
+            class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes" value="application/json"/>
+    </bean>
+
+    <!--MultiPartFile上传文件支持-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="10485760000"/>
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+    <!-- 访问静态文件（jpg,js,css）的方法 -->
+    <!--<mvc:resources location="/files/" mapping="/files/**" />-->
+    <!--<mvc:resources location="/scripts/" mapping="/scripts/**" />-->
+    <!--<mvc:resources location="/styles/" mapping="/styles/**" />-->
+    <!--<mvc:resources location="/Views/" mapping="/Views/**" />-->
+
+    <!-- Spring属性文件解密组件  -->
+    <!--<bean id="propertyConfigurers" class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer">-->
+        <!--<constructor-arg ref="configurationEncryptor" />-->
+        <!--<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />-->
+        <!--<property name="ignoreResourceNotFound" value="true" />-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath:/org/apdplat/config.properties</value>-->
+                <!--<value>classpath:config.local.properties</value>-->
+                <!--<value>classpath:/org/apdplat/db.properties</value>-->
+                <!--<value>classpath:db.local.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">-->
+        <!--<property name="config" ref="environmentVariablesConfiguration" />-->
+    <!--</bean>-->
+
+    <!--<bean id="environmentVariablesConfiguration" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">-->
+        <!--<property name="algorithm" value="PBEWithMD5AndDES" />-->
+        <!--<property name="password" value="apdplat" />-->
+    <!--</bean>-->
+</beans>
