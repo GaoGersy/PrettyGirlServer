@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gersion.mapper.GirlCategoryInfoMapper">
+  <resultMap id="BaseResultMap" type="com.gersion.model.GirlCategoryInfo">
+    <constructor>
+      <idArg column="categoryId" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="icon" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="girlType" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="viewNumber" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="praiseNumber" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    categoryId, title, icon, description, girlType, viewNumber, praiseNumber
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from girl_category_info
+    where categoryId = #{categoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from girl_category_info
+    where categoryId = #{categoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="categoryId" parameterType="com.gersion.model.GirlCategoryInfo">
+    insert into girl_category_info (categoryId, title, icon, 
+      description, girlType, viewNumber, 
+      praiseNumber)
+    values (#{categoryId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{girlType,jdbcType=INTEGER}, #{viewNumber,jdbcType=INTEGER}, 
+      #{praiseNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gersion.model.GirlCategoryInfo">
+    insert into girl_category_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        categoryId,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="girlType != null">
+        girlType,
+      </if>
+      <if test="viewNumber != null">
+        viewNumber,
+      </if>
+      <if test="praiseNumber != null">
+        praiseNumber,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="girlType != null">
+        #{girlType,jdbcType=INTEGER},
+      </if>
+      <if test="viewNumber != null">
+        #{viewNumber,jdbcType=INTEGER},
+      </if>
+      <if test="praiseNumber != null">
+        #{praiseNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gersion.model.GirlCategoryInfo">
+    update girl_category_info
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="girlType != null">
+        girlType = #{girlType,jdbcType=INTEGER},
+      </if>
+      <if test="viewNumber != null">
+        viewNumber = #{viewNumber,jdbcType=INTEGER},
+      </if>
+      <if test="praiseNumber != null">
+        praiseNumber = #{praiseNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where categoryId = #{categoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gersion.model.GirlCategoryInfo">
+    update girl_category_info
+    set title = #{title,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      girlType = #{girlType,jdbcType=INTEGER},
+      viewNumber = #{viewNumber,jdbcType=INTEGER},
+      praiseNumber = #{praiseNumber,jdbcType=INTEGER}
+    where categoryId = #{categoryId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getCategoryByType" resultType="com.gersion.model.GirlCategoryInfo">
+    SELECT * FROM girl_category_info WHERE girlType = #{girlType}
+  </select>
+  <select id="getCategoryByTitle" resultType="com.gersion.model.GirlCategoryInfo">
+    SELECT title FROM girl_category_info WHERE title = #{title}
+  </select>
+  <select id="getCategoryLikeFileName" resultType="com.gersion.model.GirlCategoryInfo">
+    select id from girl_image_info where imageUrl like #{fileName}
+  </select>
+</mapper>

@@ -19,17 +19,30 @@
         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <!--<bean id="propertyConfigurer"-->
+            <!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+        <!--<property name="locations">-->
+            <!--<list>-->
+                <!--<value>classpath*:application.properties</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <bean id="propertyConfigurer"
             class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="properties" ref="configProperties"/>
+    </bean>
+
+    <bean id="configProperties"
+            class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
             <list>
-                <value>classpath*:application.properties</value>
+                <value>classpath:application.properties</value>
             </list>
         </property>
     </bean>
 
-    <context:component-scan base-package="com.gaofen">
+    <context:component-scan base-package="com.gersion">
         <context:exclude-filter type="annotation"
                 expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
@@ -65,7 +78,7 @@
 
     <!-- Mapper动态代理开发   扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-            p:basePackage="com.gaofen.mapper"
+            p:basePackage="com.gersion.mapper"
             p:sqlSessionFactoryBeanName="sqlSessionFactoryBean">
     </bean>
 
@@ -101,7 +114,7 @@
 
     <!-- 事务 aop 配置 -->
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* com.gaofen.service.*.*(..))"/>
+        <aop:pointcut id="serviceMethods" expression="execution(* com.gersion.service.*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 

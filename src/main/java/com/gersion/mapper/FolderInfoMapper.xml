@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gersion.mapper.FolderInfoMapper">
+    <resultMap id="BaseResultMap" type="com.gersion.model.FolderInfo">
+        <constructor>
+            <idArg column="folderId" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="folderName" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    folderId, folderName
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from folder_info
+        where folderId = #{folderId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from folder_info
+    where folderId = #{folderId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.gersion.model.FolderInfo">
+    insert into folder_info (folderId, folderName)
+    values (#{folderId,jdbcType=INTEGER}, #{folderName,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.gersion.model.FolderInfo">
+        insert into folder_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="folderId != null">
+                folderId,
+            </if>
+            <if test="folderName != null">
+                folderName,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="folderId != null">
+                #{folderId,jdbcType=INTEGER},
+            </if>
+            <if test="folderName != null">
+                #{folderName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gersion.model.FolderInfo">
+        update folder_info
+        <set>
+            <if test="folderName != null">
+                folderName = #{folderName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where folderId = #{folderId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gersion.model.FolderInfo">
+    update folder_info
+    set folderName = #{folderName,jdbcType=VARCHAR}
+    where folderId = #{folderId,jdbcType=INTEGER}
+  </update>
+    <select id="getFolderInfo" resultType="com.gersion.model.FolderInfo">
+    SELECT * FROM folder_info WHERE folderName=#{folderName}
+  </select>
+    <select id="getLastFolderName" resultType="string">
+        select folderName from folder_info order by folderId desc limit 1
+    </select>
+</mapper>

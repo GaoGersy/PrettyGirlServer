@@ -44,5 +44,5 @@
     </bean>
 
 <!--     配置单机版工具类
-    <bean class="com.gaofen.redis.RedisPool" />-->
+    <bean class="com.gersionn.redis.RedisPool" />-->
 </beans>
