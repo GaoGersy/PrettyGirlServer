@@ -2,31 +2,15 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.fileStorage</groupId>
-    <artifactId>fileStorage</artifactId>
+    <groupId>com.gersion</groupId>
+    <artifactId>prettygirl</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>fileStorage Maven Webapp</name>
+    <name>prettygirl Maven Webapp</name>
     <url>http://maven.apache.org</url>
-    <!--<dependencies>-->
-    <!--<dependency>-->
-    <!--<groupId>junit</groupId>-->
-    <!--<artifactId>junit</artifactId>-->
-    <!--<version>3.8.1</version>-->
-    <!--<scope>test</scope>-->
-    <!--</dependency>-->
-
-    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.springframework/spring-beans &ndash;&gt;-->
-    <!--<dependency>-->
-    <!--<groupId>org.springframework</groupId>-->
-    <!--<artifactId>spring-beans</artifactId>-->
-    <!--<version>4.3.9.RELEASE</version>-->
-    <!--</dependency>-->
-
-    <!--</dependencies>-->
     <properties>
         <!-- sonar -->
-        <sonar.projectKey>fileStorage</sonar.projectKey>
+        <sonar.projectKey>prettygirl</sonar.projectKey>
         <sonar.projectName>框架</sonar.projectName>
         <!-- -->
         <sonar.sources>pom.xml,/src/main/java/,/src/test/java/</sonar.sources>
@@ -97,47 +81,11 @@
         <commons-lang3.version>3.4</commons-lang3.version>
         <xmljackson.version>2.8.3</xmljackson.version>
         <jetty-maven-plugin.version>9.3.0.RC0</jetty-maven-plugin.version>
+
+        <okhttp.version>3.9.1</okhttp.version>
     </properties>
 
     <dependencies>
-        <!--分页查询start-->
-        <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper -->
-        <!--<dependency>-->
-        <!--<groupId>com.github.pagehelper</groupId>-->
-        <!--<artifactId>pagehelper</artifactId>-->
-        <!--<version>5.0.4</version>-->
-        <!--</dependency>-->
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.github.jsqlparser/jsqlparser &ndash;&gt;-->
-        <!--<dependency>-->
-        <!--<groupId>com.github.jsqlparser</groupId>-->
-        <!--<artifactId>jsqlparser</artifactId>-->
-        <!--<version>1.1</version>-->
-        <!--</dependency>-->
-
-        <!--分页查询end-->
-        <!--通用Mapper start-->
-        <!--<dependency>-->
-        <!--<groupId>tk.mybatis</groupId>-->
-        <!--<artifactId>mapper</artifactId>-->
-        <!--<version>3.4.2</version>-->
-        <!--</dependency>-->
-        <!--通用Mapper end-->
-
-        <!-- https://mvnrepository.com/artifact/com.thetransactioncompany/cors-filter -->
-        <dependency>
-            <groupId>com.thetransactioncompany</groupId>
-            <artifactId>cors-filter</artifactId>
-            <version>2.6</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.jasypt/jasypt -->
-        <!--<dependency>-->
-        <!--<groupId>org.jasypt</groupId>-->
-        <!--<artifactId>jasypt</artifactId>-->
-        <!--<version>1.9.2</version>-->
-        <!--</dependency>-->
-
 
         <!-- https://mvnrepository.com/artifact/oracle/ojdbc6 -->
         <dependency>
@@ -146,34 +94,17 @@
             <version>11.2.0.3</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.3.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.squareup.okhttp/okhttp -->
-        <dependency>
-            <groupId>com.squareup.okhttp</groupId>
+            <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>2.7.5</version>
+            <version>${okhttp.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>${xmljackson.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${spring-security.version}</version>
         </dependency>
 
         <dependency>
@@ -188,12 +119,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.binarywang</groupId>
-            <artifactId>weixin-java-mp</artifactId>
-            <version>${weixin-java-mp.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
@@ -202,16 +127,6 @@
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
             <version>${ant.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>core</artifactId>
-            <version>${zxing.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.zxing</groupId>
-            <artifactId>javase</artifactId>
-            <version>${zxing.version}</version>
         </dependency>
         <!-- json -->
         <dependency>
@@ -341,17 +256,6 @@
             <version>${druid.version}</version>
         </dependency>
 
-        <!-- jackson -->
-        <!--<dependency>-->
-        <!--<groupId>org.codehaus.jackson</groupId>-->
-        <!--<artifactId>jackson-core-asl</artifactId>-->
-        <!--<version>${jackson.version}</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-        <!--<groupId>org.codehaus.jackson</groupId>-->
-        <!--<artifactId>jackson-mapper-asl</artifactId>-->
-        <!--<version>${jackson.version}</version>-->
-        <!--</dependency>-->
 
         <!-- log start -->
         <dependency>
@@ -486,13 +390,6 @@
             <version>${aspectj.version}</version>
         </dependency>
 
-        <!-- hibernate-validator -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate.validator.version}</version>
-        </dependency>
-
         <!-- netty -->
         <dependency>
             <groupId>io.netty</groupId>
@@ -594,12 +491,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.solr</groupId>
-            <artifactId>solr-solrj</artifactId>
-            <version>4.10.3</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.4.1</version>
@@ -622,12 +513,6 @@
             <artifactId>noggit</artifactId>
             <version>0.6</version>
         </dependency>
-        <!-- MongoDB驱动 -->
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongo-java-driver</artifactId>
-            <version>3.4.0</version>
-        </dependency>
         <!-- org.jsoup -->
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -646,24 +531,6 @@
             <version>0.9.1</version>
         </dependency>
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-            <version>0.7.0</version>
-        </dependency>
-        <!--
-       <dependency>
-        <groupId>org.springframework.data</groupId>
-        <artifactId>spring-data-mongodb</artifactId>
-        <version>1.9.6.RELEASE</version>
-    </dependency> -->
-
-        <!-- <dependency>
-            <groupId>org.bytedeco</groupId>
-            <artifactId>javacv</artifactId>
-            <version>0.8</version>
-        </dependency> -->
-        <!-- https://mvnrepository.com/artifact/org.bytedeco/javacv -->
-        <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>javacv</artifactId>
             <version>0.8</version>
@@ -675,7 +542,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>gaofen</finalName>
+        <finalName>prettygirl</finalName>
         <plugins>
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
@@ -701,30 +568,6 @@
                 </configuration>
             </plugin>
 
-            <!--<plugin>-->
-            <!--<artifactId>maven-resources-plugin</artifactId>-->
-            <!--<version>2.5</version>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>copy-xmls</id>-->
-            <!--<phase>process-sources</phase>-->
-            <!--<goals>-->
-            <!--<goal>copy-resources</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-            <!--<outputDirectory>${basedir}/target/classes</outputDirectory>-->
-            <!--<resources>-->
-            <!--<resource>-->
-            <!--<directory>${basedir}/src/main/java</directory>-->
-            <!--<includes>-->
-            <!--<include>**/*.xml</include>-->
-            <!--</includes>-->
-            <!--</resource>-->
-            <!--</resources>-->
-            <!--</configuration>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
         <resources>
             <resource>
