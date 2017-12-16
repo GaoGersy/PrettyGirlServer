@@ -21,7 +21,9 @@ public interface GirlTypeMapper {
 
     int updateByPrimaryKey(GirlType record);
 
-    List<GirlType> getCategoryByName(@Param("categoryName") String categoryName);
+    Integer getCategoryByName(@Param("categoryName") String categoryName);
 
     List<GirlType> getAllImageCategory();
+
+    Integer getLastType();
 }

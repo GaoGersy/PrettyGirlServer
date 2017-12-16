@@ -15,7 +15,9 @@ public class GirlCategoryInfo {
 
     private Integer praiseNumber;
 
-    public GirlCategoryInfo(Integer categoryId, String title, String icon, String description, Integer girlType, Integer viewNumber, Integer praiseNumber) {
+    private String folderName;
+
+    public GirlCategoryInfo(Integer categoryId, String title, String icon, String description, Integer girlType, Integer viewNumber, Integer praiseNumber, String folderName) {
         this.categoryId = categoryId;
         this.title = title;
         this.icon = icon;
@@ -23,6 +25,7 @@ public class GirlCategoryInfo {
         this.girlType = girlType;
         this.viewNumber = viewNumber;
         this.praiseNumber = praiseNumber;
+        this.folderName = folderName;
     }
 
     public GirlCategoryInfo() {
@@ -83,5 +86,13 @@ public class GirlCategoryInfo {
 
     public void setPraiseNumber(Integer praiseNumber) {
         this.praiseNumber = praiseNumber;
+    }
+
+    public String getFolderName() {
+        return folderName;
+    }
+
+    public void setFolderName(String folderName) {
+        this.folderName = folderName == null ? null : folderName.trim();
     }
 }

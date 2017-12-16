@@ -25,4 +25,6 @@ public interface GirlImageInfoMapper {
     List<GirlImageInfo> getImageInfoByType(ImagePageParam bean);
 
     List<GirlImageInfo> getImageByCategoryId(@Param("categoryId") Integer categoryId);
+
+    String getImageByUrl(GirlImageInfo record);
 }

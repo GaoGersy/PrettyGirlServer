@@ -101,4 +101,7 @@
   <select id="getImageByCategoryId" resultType="com.gersion.model.GirlImageInfo">
     SELECT * FROM girl_image_info WHERE categoryId = #{categoryId}
   </select>
+    <select id="getImageByUrl" resultType="java.lang.String">
+      SELECT imageUrl FROM girl_image_info WHERE title = #{title} AND imageUrl LIKE #{imageUrl}
+    </select>
 </mapper>

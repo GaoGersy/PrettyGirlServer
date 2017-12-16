@@ -71,13 +71,16 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getCategoryByName" resultType="com.gersion.model.GirlType">
-    SELECT *
+  <select id="getCategoryByName" resultType="integer">
+    SELECT girlType
     FROM girl_type
     WHERE categoryName = #{categoryName}
   </select>
 
   <select id="getAllImageCategory" resultType="com.gersion.model.GirlType">
     SELECT * FROM girl_type
+  </select>
+  <select id="getLastType" resultType="java.lang.Integer">
+    SELECT max(girlType) FROM girl_type
   </select>
 </mapper>

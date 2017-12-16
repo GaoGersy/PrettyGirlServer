@@ -3,11 +3,9 @@ package com.gersion.mapper;
 import com.gersion.model.GirlCategoryInfo;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
 public interface GirlCategoryInfoMapper {
     int deleteByPrimaryKey(Integer categoryId);
 
@@ -23,7 +21,7 @@ public interface GirlCategoryInfoMapper {
 
     List<GirlCategoryInfo> getCategoryByTitle(@Param("title") String title);
 
-    List<GirlCategoryInfo> getCategoryLikeFileName(@Param("fileName") String fileName);
-
     List<GirlCategoryInfo> getCategoryByType(@Param("girlType")Integer bean);
+
+    String getFolderNameByTitle(@Param("title") String title);
 }

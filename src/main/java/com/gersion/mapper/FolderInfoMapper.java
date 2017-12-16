@@ -3,9 +3,7 @@ package com.gersion.mapper;
 import com.gersion.model.FolderInfo;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface FolderInfoMapper {
     int deleteByPrimaryKey(Integer folderId);
 

@@ -10,10 +10,11 @@
       <arg column="girlType" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="viewNumber" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="praiseNumber" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="folderName" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    categoryId, title, icon, description, girlType, viewNumber, praiseNumber
+    categoryId, title, icon, description, girlType, viewNumber, praiseNumber, folderName
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -28,10 +29,10 @@
   <insert id="insert" useGeneratedKeys="true" keyProperty="categoryId" parameterType="com.gersion.model.GirlCategoryInfo">
     insert into girl_category_info (categoryId, title, icon, 
       description, girlType, viewNumber, 
-      praiseNumber)
+      praiseNumber, folderName)
     values (#{categoryId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{girlType,jdbcType=INTEGER}, #{viewNumber,jdbcType=INTEGER}, 
-      #{praiseNumber,jdbcType=INTEGER})
+      #{praiseNumber,jdbcType=INTEGER}, #{folderName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.gersion.model.GirlCategoryInfo">
     insert into girl_category_info
@@ -57,6 +58,9 @@
       <if test="praiseNumber != null">
         praiseNumber,
       </if>
+      <if test="folderName != null">
+        folderName,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="categoryId != null">
@@ -79,6 +83,9 @@
       </if>
       <if test="praiseNumber != null">
         #{praiseNumber,jdbcType=INTEGER},
+      </if>
+      <if test="folderName != null">
+        #{folderName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -103,6 +110,9 @@
       <if test="praiseNumber != null">
         praiseNumber = #{praiseNumber,jdbcType=INTEGER},
       </if>
+      <if test="folderName != null">
+        folderName = #{folderName,jdbcType=VARCHAR},
+      </if>
     </set>
     where categoryId = #{categoryId,jdbcType=INTEGER}
   </update>
@@ -113,7 +123,8 @@
       description = #{description,jdbcType=VARCHAR},
       girlType = #{girlType,jdbcType=INTEGER},
       viewNumber = #{viewNumber,jdbcType=INTEGER},
-      praiseNumber = #{praiseNumber,jdbcType=INTEGER}
+      praiseNumber = #{praiseNumber,jdbcType=INTEGER},
+      folderName = #{folderName,jdbcType=VARCHAR}
     where categoryId = #{categoryId,jdbcType=INTEGER}
   </update>
 
@@ -121,9 +132,9 @@
     SELECT * FROM girl_category_info WHERE girlType = #{girlType}
   </select>
   <select id="getCategoryByTitle" resultType="com.gersion.model.GirlCategoryInfo">
-    SELECT title FROM girl_category_info WHERE title = #{title}
+    SELECT * FROM girl_category_info WHERE title = #{title}
   </select>
-  <select id="getCategoryLikeFileName" resultType="com.gersion.model.GirlCategoryInfo">
-    select id from girl_image_info where imageUrl like #{fileName}
+  <select id="getFolderNameByTitle" resultType="java.lang.String">
+    SELECT folderName FROM girl_category_info WHERE title = #{title}
   </select>
 </mapper>
