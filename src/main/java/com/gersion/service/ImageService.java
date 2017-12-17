@@ -17,4 +17,10 @@ public interface ImageService {
     List<GirlImageInfo> getAllImageByCategoryId(int categoryId);
 
     PageInfo<GirlCategoryInfo> getCategoryListByGirlType(ImagePageParam bean);
+
+    List<GirlCategoryInfo> getCategoryByIds(String[] categoryIds);
+
+    long getMaxCategoryId();
+
+    long getMinCategoryId();
 }

@@ -53,4 +53,19 @@ public class ImageServiceImpl implements ImageService {
         PageInfo<GirlCategoryInfo> pageInfo = new PageInfo<GirlCategoryInfo>(imageList);
         return pageInfo;
     }
+
+    @Override
+    public List<GirlCategoryInfo> getCategoryByIds(String[] categoryIds) {
+        return mGirlCategoryInfoMapper.getCategoryByIds(categoryIds);
+    }
+
+    @Override
+    public long getMaxCategoryId() {
+        return mGirlCategoryInfoMapper.getMaxCategoryId();
+    }
+
+    @Override
+    public long getMinCategoryId() {
+        return mGirlCategoryInfoMapper.getMinCategoryId();
+    }
 }

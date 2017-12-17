@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface GirlCategoryInfoMapper {
+
     int deleteByPrimaryKey(Integer categoryId);
 
     int insert(GirlCategoryInfo record);
@@ -24,4 +25,10 @@ public interface GirlCategoryInfoMapper {
     List<GirlCategoryInfo> getCategoryByType(@Param("girlType")Integer bean);
 
     String getFolderNameByTitle(@Param("title") String title);
+
+    long getMaxCategoryId();
+
+    long getMinCategoryId();
+
+    List<GirlCategoryInfo> getCategoryByIds(@Param("categoryIds") String[] categoryIds);
 }
